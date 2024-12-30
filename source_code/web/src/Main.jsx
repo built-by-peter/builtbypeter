@@ -64,10 +64,10 @@ const Main = () => {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1, justifyContent: "space-between", width: "100%"}}>
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-          <p style={{ fontSize: isMobile ? "3rem" : "4rem", fontWeight: 100, margin: 0, lineHeight: 1}}>
+          <p style={{ fontSize: isMobile ? "3rem" : "4rem", fontWeight: 100, margin: 0, marginTop: 15, lineHeight: 1}}>
             BUILT BY PETER
           </p>
-          <p style={{ fontSize: isMobile ? "1.5rem" : "2rem", fontWeight: 100,  color: "#eee",margin: 0, lineHeight: 1, padding: 5, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }}>Just for You</p>
+          <p style={{ fontSize: isMobile ? "1.5rem" : "2rem", fontWeight: 100,  color: "#eee",margin: 0, lineHeight: 1, padding: 5, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }}>Home Improvements</p>
         </div>
 
         <div style={{ gap: 20, display: "flex", flexDirection: "column"}}>
