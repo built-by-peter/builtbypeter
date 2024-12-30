@@ -1,6 +1,6 @@
 import ContactForm from "./ContactForm";
 import Reviews from "./Reviews";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles.css";
 
 const Main = () => {
