@@ -10,17 +10,9 @@ const ContactForm = (props) => {
   const [fail, setFail] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(false);
+  
 
-  useEffect(() => {
-    // Simple check to see if the user is on a mobile device
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    setIsMobile(
-      /android|iPad|iPhone|iPod|windows phone|mobile/i.test(userAgent)
-    );
-  }, []);
-
-  const phoneNumber = "+1234567890"; 
+  const phoneNumber = "+19299001378"; 
   const prefilText = "Hello, I'm interested in your services!"; 
 
 
@@ -48,6 +40,18 @@ const ContactForm = (props) => {
     });
 
     setDone(true)
+  };
+
+  const handleSMSClick = () => {
+    const link = document.createElement("a");
+    link.href = `sms:${phoneNumber}?body=${encodeURIComponent(prefilText)}`;
+    link.click();
+  };
+
+  const handleCallClick = () => {
+    const link = document.createElement("a");
+    link.href = `tel:${phoneNumber}`;
+    link.click();
   };
 
   if (loading)
@@ -121,11 +125,11 @@ const ContactForm = (props) => {
         </div>
     
         {/* Phone Message */}
-        {isMobile && (
+        {props.isMobile && (
           <div style={{ gap: 20, display: "flex", flexDirection: "row", alignSelf: "center", bottom: 0, position: "absolute", margin: 15}}>
             <button
               onClick={() => {
-                window.open(`tel:${phoneNumber}`);
+                handleCallClick();
               }}
               style={{
                 display: "flex",
@@ -149,7 +153,7 @@ const ContactForm = (props) => {
             </button>
 
             <button
-              onClick={() => window.open(`sms:${phoneNumber}?body=${encodeURIComponent(prefilText)}`, "_self")}
+              onClick={() => handleSMSClick()}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -172,7 +176,7 @@ const ContactForm = (props) => {
             </button>
           </div>
         )}
-        {!isMobile && (
+        {!props.isMobile && (
           <div style={{ gap: 20, display: "flex", flexDirection: "row", alignSelf: "center", bottom: 0, position: "absolute", margin: 15}}>
 
             <div
