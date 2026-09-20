@@ -1,5 +1,5 @@
 import Review from "./Review";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ const Reviews = ({host}) => {
       });
   }, [host]);
 
-  if (reviews)
+  if (!reviews.length) return null;
 
     return (
         <div
@@ -55,10 +55,6 @@ const Reviews = ({host}) => {
             <span
                 className="carousel-control-prev-icon"
                 aria-hidden="true"
-                style={{
-                    backgroundColor: "dadada",
-                    borderRadius: "50%",
-                }}
             ></span>
             <span className="visually-hidden">Previous</span>
             </button>
@@ -71,10 +67,6 @@ const Reviews = ({host}) => {
             <span
                 className="carousel-control-next-icon"
                 aria-hidden="true"
-                style={{
-                    backgroundColor: "dadada",
-                    borderRadius: "50%",
-                }}
             ></span>
             <span className="visually-hidden">Next</span>
             </button>

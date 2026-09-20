@@ -1,147 +1,152 @@
 import ContactForm from "./ContactForm";
 import Reviews from "./Reviews";
-import { useState, useEffect } from "react";
+import { IconCamera, IconHammer, IconBath, IconLayers, IconRuler, IconInstagram, IconPhone } from "./Icons";
 import "./styles.css";
 
+const SERVER_URL = "https://resume-backend-f553.onrender.com";
+const GALLERY_URL = "https://www.instagram.com/built.by.peter/";
+const PHONE_NUMBER = "+19299001378";
+const PHONE_DISPLAY = "(929) 900-1378";
+
+const SERVICES = [
+  { icon: IconLayers, title: "Kitchens", body: "Full kitchen remodels, cabinetry, and finishes built to last." },
+  { icon: IconBath, title: "Bathrooms", body: "Modern, functional bathroom renovations from floor to ceiling." },
+  { icon: IconHammer, title: "Basements", body: "Turn unfinished space into a room your family will love." },
+  { icon: IconRuler, title: "Carpentry & Trim", body: "Custom molding, millwork, and detail work, done right." },
+];
+
 const Main = () => {
-  const SERVER_URL = `https://resume-backend-f553.onrender.com`;
-  const [contact, setContact] = useState(false);
-  const galleryUrl = "https://www.instagram.com/built.by.peter/";
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Simple check to see if the user is on a mobile device
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    setIsMobile(
-      /android|iPad|iPhone|iPod|windows phone|mobile/i.test(userAgent)
-    );
-  }, []);
-
- 
-
   return (
-    <div
-      style={{
-        display: "flex",
-        padding: 10,
-        justifyContent: "space-between",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundImage: `url('bg.png')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundBlendMode: "overlay", // Mix the image and color
-        backgroundColor: "rgba(242, 242, 242, 0.5)", // Semi-transparent gray
-        flex: 1,
-        width: "100%"
-      }}
-    >
+    <div className="app">
+      <header className="site-header">
+        <a className="brand" href="#top">
+          <img src="logo.png" alt="Built By Peter logo" />
+          <span className="brand-text">BUILT BY PETER</span>
+        </a>
+        <div className="header-actions">
+          <a className="icon-btn" href={`tel:${PHONE_NUMBER}`} aria-label="Call Built By Peter">
+            <IconPhone className="icon" />
+          </a>
+          <a className="btn btn-primary btn-sm" href="#contact">
+            Free Quote
+          </a>
+        </div>
+      </header>
 
-      {contact && (
-        <div>
-        
-        <img
-          src={`back.png`}
-          alt="Toggle Form"
-          style={{
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            zIndex: 1000,
-            width: "50px",
-            height: "50px",
-            cursor: "pointer",
-          }}
-          onClick={() => setContact(false)}
-        />
+      <section
+        className="hero"
+        id="top"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(20, 28, 23, 0.55), rgba(20, 28, 23, 0.82)), url(hero.jpg)",
+        }}
+      >
+        <div className="hero-inner">
+          <img className="hero-logo" src="logo-white.png" alt="Built By Peter" />
+          <h1>BUILT BY PETER</h1>
+          <p className="hero-tagline">just for you</p>
+          <p className="hero-sub">Residential Remodeling</p>
 
-        <ContactForm host={SERVER_URL} isMobile={isMobile} />
-      </div>
-      )}
+          <div className="hero-actions">
+            <a className="btn btn-primary" href="#contact">
+              Get a Free Quote
+            </a>
+            <a
+              className="btn btn-outline"
+              href={GALLERY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconCamera className="icon" />
+              View Our Work
+            </a>
+          </div>
+        </div>
+      </section>
 
-      {!contact && (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1, justifyContent: "space-between", width: "100%"}}>
-
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-          <p style={{ fontSize: isMobile ? "3rem" : "4rem", fontWeight: 100, margin: 0, marginTop: 15, lineHeight: 1}}>
-            BUILT BY PETER
+      <section className="section">
+        <div className="section-head">
+          <p className="eyebrow">What We Do</p>
+          <h2 className="section-title">Built for how you live</h2>
+          <p className="section-body">
+            From full remodels to the finishing touches, every project is handled with the same
+            care and attention to detail.
           </p>
-          <p style={{ fontSize: isMobile ? "1.5rem" : "2rem", fontWeight: 100,  color: "#eee",margin: 0, lineHeight: 1, padding: 5, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }}>Home Improvements</p>
+        </div>
+        <div className="services-grid">
+          {SERVICES.map(({ icon: Icon, title, body }) => (
+            <div className="service-card" key={title}>
+              <Icon className="service-icon" />
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <div className="section-head">
+          <p className="eyebrow">Reviews</p>
+          <h2 className="section-title">What clients say</h2>
+        </div>
+        <div className="reviews-wrap" style={{ maxWidth: 560, margin: "0 auto" }}>
+          <Reviews host={SERVER_URL} />
+        </div>
+      </section>
+
+      <section className="section section-dark" id="contact">
+        <div className="section-head">
+          <p className="eyebrow">Get In Touch</p>
+          <h2 className="section-title">Let's build something great</h2>
+          <p className="section-body">
+            Reach out for a free, no-obligation quote. Call, text, or send a message below.
+          </p>
         </div>
 
-        <div style={{ gap: 20, display: "flex", flexDirection: "column"}}>
-          <button
-            onClick={() => {
-              window.open(galleryUrl, "_blank", "noopener,noreferrer");
-            }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "none",
-              borderRadius: "50px",
-              padding: "10px 20px",
-              cursor: "pointer",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              fontSize: "16px",
-              fontWeight: "100",
-            }}
-          >
-            <img
-              src="camera.png"
-              alt={"icon"}
-              style={{
-                width: "24px",
-                height: "24px",
-                marginRight: "10px",
-              }}
-            />
-            Browse photo gallery
-          </button>
+        <div className="contact-grid">
+          <div className="contact-card">
+            <ContactForm phone={PHONE_NUMBER} />
+          </div>
 
-          <button
-            onClick={() => {
-              setContact(true);
-            }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "none",
-              borderRadius: "50px",
-              padding: "10px 20px",
-              cursor: "pointer",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              fontSize: "16px",
-              fontWeight: "100",
-            }}
-          >
-            <img
-              src="email.png"
-              alt={"icon"}
-              style={{
-                width: "24px",
-                height: "24px",
-                marginRight: "10px",
-              }}
-            />
-            Schedule a free quote
-          </button>
-
-          
+          <div className="contact-info">
+            <div>
+              <h3 style={{ color: "var(--cream)" }}>Contact</h3>
+            </div>
+            <a className="contact-row" href={`tel:${PHONE_NUMBER}`}>
+              <span className="icon-btn">
+                <IconPhone className="icon" />
+              </span>
+              <span>{PHONE_DISPLAY}</span>
+            </a>
+            <a
+              className="contact-row"
+              href={GALLERY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="icon-btn">
+                <IconInstagram className="icon" />
+              </span>
+              <span>@built.by.peter</span>
+            </a>
+          </div>
         </div>
+      </section>
 
-        <div style={{ width: "100%", maxWidth: 500 }}>
-          <Reviews host={SERVER_URL}></Reviews>
+      <footer className="site-footer">
+        <div className="footer-inner">
+          <img className="footer-logo" src="logo-white.png" alt="Built By Peter" />
+          <div className="footer-links">
+            <a href={`tel:${PHONE_NUMBER}`}>{PHONE_DISPLAY}</a>
+            <a href={GALLERY_URL} target="_blank" rel="noopener noreferrer">
+              Instagram
+            </a>
+            <a href="#contact">Free Quote</a>
+          </div>
+          <p className="footer-copy">© {new Date().getFullYear()} Built By Peter. Licensed & Insured.</p>
         </div>
-      </div>
-        
-        )}
-
-      </div>
-      
-      
+      </footer>
+    </div>
   );
 };
 
